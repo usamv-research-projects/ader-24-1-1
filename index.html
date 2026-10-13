@@ -1,0 +1,621 @@
+<title>ADER 24.1.1 Pharma-Farming</title>
+<meta name="description" content="Proiect ADER 24.1.1 – Model de fermă sericicolă familială pentru valorificarea inovativă a producțiilor sericicole secundare obținute din sericicultură și moricultură în sistem Pharma-Farming.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: editorial project site — sticky nav, split hero, sections with a side label column on wide screens, phases as a dated sequence. */
+:root{
+  --paper:#F3F5EF; --surface:#FFFFFF; --ink:#18241D; --muted:#56645B; --line:#D5DCD1;
+  --leaf:#2E5B39; --leaf-soft:#E2EADF; --mulberry:#6C1F46; --mulberry-soft:#F2E3EA; --silk:#EFE9D6;
+  --display:"Young Serif", Georgia, "Times New Roman", serif;
+  --body:"Public Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --frame:#FFFFFF;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#111713; --surface:#18201B; --ink:#E6ECE4; --muted:#9BA99F; --line:#2B362F;
+  --leaf:#8DC59A; --leaf-soft:#1E2B22; --mulberry:#E58BB5; --mulberry-soft:#2C1A23; --silk:#23251E; --frame:#F4F4F0; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#111713; --surface:#18201B; --ink:#E6ECE4; --muted:#9BA99F; --line:#2B362F;
+  --leaf:#8DC59A; --leaf-soft:#1E2B22; --mulberry:#E58BB5; --mulberry-soft:#2C1A23; --silk:#23251E; --frame:#F4F4F0; color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:1.0625rem;line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:var(--leaf);text-underline-offset:3px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--mulberry);outline-offset:3px;border-radius:4px}
+h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.15;text-wrap:balance;margin:0}
+h2{font-size:clamp(1.8rem,3.4vw,2.6rem)}
+h3{font-size:1.35rem}
+p{margin:0}
+.wrap{max-width:1180px;margin-inline:auto;padding-inline:clamp(16px,4vw,40px)}
+.eyebrow{font-family:var(--mono);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.prose{max-width:66ch;display:grid;gap:1rem}
+.muted{color:var(--muted)}
+figure{margin:0}
+figcaption{font-size:.85rem;color:var(--muted);margin-top:.5rem;line-height:1.45}
+img{display:block;max-width:100%;height:auto}
+.num{font-variant-numeric:tabular-nums}
+
+/* nav */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:1.5rem;min-height:60px}
+.brand{font-family:var(--mono);font-weight:500;font-size:.9rem;text-decoration:none;color:var(--ink);white-space:nowrap;display:flex;gap:.5rem;align-items:center}
+.brand b{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--mulberry)}
+.nav{min-width:0;display:flex;gap:1.1rem;overflow-x:auto;scrollbar-width:none;margin-left:auto;font-size:.92rem}
+.nav::-webkit-scrollbar{display:none}
+.nav a{color:var(--muted);text-decoration:none;white-space:nowrap;padding-block:.4rem}
+.nav a:hover{color:var(--ink)}
+
+/* hero */
+.hero{padding-block:clamp(2.5rem,6vw,5rem) clamp(2rem,4vw,3.5rem)}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(1.5rem,4vw,3.5rem);align-items:end}
+.hero h1{font-size:clamp(2rem,4.4vw,3.4rem);margin-top:1rem}
+.hero h1 em{font-style:normal;color:var(--mulberry)}
+.hero .lede{margin-top:1.25rem;max-width:58ch;color:var(--muted);font-size:1.1rem}
+.hero-img{position:relative}
+.hero-img img{border-radius:2px;aspect-ratio:4/5;object-fit:cover;width:100%}
+.hero-img .tag{position:absolute;left:-1px;bottom:1rem;background:var(--paper);padding:.45rem .8rem;font-family:var(--mono);font-size:.75rem;color:var(--ink)}
+.facts{margin-top:clamp(2rem,4vw,3rem);display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));border-top:1px solid var(--ink);}
+.facts div{padding:1rem 1rem 1rem 0;border-bottom:1px solid var(--line)}
+.facts dt{font-family:var(--mono);font-size:.72rem;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.facts dd{margin:.25rem 0 0;font-weight:600}
+
+/* sections */
+section.block{padding-block:clamp(3rem,7vw,5.5rem);border-top:1px solid var(--line)}
+.sgrid{display:grid;grid-template-columns:220px minmax(0,1fr);gap:clamp(1.5rem,4vw,3rem)}
+.slabel{position:sticky;top:84px;align-self:start;display:grid;gap:.4rem}
+.slabel .n{font-family:var(--mono);font-size:.78rem;color:var(--mulberry)}
+.sbody{min-width:0;display:grid;gap:2rem}
+.sbody>*,.phase>*,.two>*,.three>*{min-width:0}
+
+/* objectives */
+.objective{background:var(--leaf);color:var(--paper);padding:clamp(1.25rem,3vw,2rem);font-family:var(--display);font-size:clamp(1.2rem,2.2vw,1.55rem);line-height:1.35}
+.results{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:0 2rem}
+.results li{padding:.9rem 0 .9rem 1.8rem;border-bottom:1px solid var(--line);position:relative}
+.results li::before{content:"";position:absolute;left:0;top:1.35rem;width:.9rem;height:.5rem;border-left:2px solid var(--leaf);border-bottom:2px solid var(--leaf);transform:rotate(-45deg)}
+
+/* life cycle */
+.cycle{overflow-x:auto}
+.cycle-row{display:grid;grid-template-columns:repeat(5,minmax(120px,1fr));gap:.6rem;min-width:640px}
+.stage{display:grid;gap:.5rem;align-content:start}
+.stage .s{background:var(--surface);border:1px solid var(--line);padding:.7rem .8rem;position:relative}
+.stage .s small{display:block;font-family:var(--mono);font-size:.7rem;color:var(--muted)}
+.stage .s strong{font-family:var(--display);font-weight:400;font-size:1.1rem}
+.stage:not(:last-child) .s::after{content:"→";position:absolute;right:-.62rem;top:50%;transform:translate(50%,-50%);color:var(--muted);font-size:.9rem}
+.stage ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.35rem}
+.chip{font-size:.8rem;padding:.2rem .55rem;border-radius:999px;background:var(--mulberry-soft);color:var(--mulberry);font-weight:500}
+
+.byp{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.byp div{background:var(--surface);padding:1.1rem 1.2rem;display:grid;gap:.4rem;align-content:start}
+.byp h3{font-size:1.15rem}
+.byp p{font-size:.95rem;color:var(--muted)}
+
+.frame{background:var(--frame);padding:clamp(.5rem,1.5vw,1rem);border:1px solid var(--line)}
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.5rem}
+.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}
+
+/* partners */
+.partners{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.partner{background:var(--surface);padding:1.25rem 1.3rem;display:grid;gap:.5rem;align-content:start}
+.partner .role{display:flex;justify-content:space-between;gap:1rem;font-family:var(--mono);font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.partner .role b{color:var(--mulberry);font-weight:500}
+.partner h3{font-size:1.12rem;line-height:1.3}
+.partner p{font-size:.95rem}
+.partner.lead{background:var(--leaf-soft)}
+.ph{display:flex;gap:.9rem;align-items:center}
+.ph .role{flex:1;min-width:0;flex-direction:column;gap:.15rem}
+.logo{flex:none;width:64px;height:64px;border-radius:50%;background:#FFFFFF;display:grid;place-items:center;padding:4px;box-shadow:0 0 0 1px var(--line)}
+.logo img{max-width:100%;max-height:100%;object-fit:contain}
+.partner .desc{color:var(--muted);font-size:.93rem}
+.funder{display:flex;gap:.8rem;align-items:center}
+.funder img{width:56px;height:56px;flex:none}
+.logos{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:2rem}
+.logos img{width:64px;height:64px;object-fit:contain;background:#FFFFFF;border-radius:50%;padding:5px}
+
+/* phases */
+.phase{display:grid;gap:1.4rem;padding-bottom:2.5rem;border-bottom:1px dashed var(--line)}
+.phase:last-child{border-bottom:0;padding-bottom:0}
+.phase-head{display:grid;gap:.4rem}
+.phase-head .when{font-family:var(--mono);font-size:.8rem;color:var(--mulberry)}
+.acts{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.acts li{display:grid;grid-template-columns:3.2rem minmax(0,1fr);gap:.8rem;padding:.75rem 0;border-top:1px solid var(--line)}
+.acts li span{font-family:var(--mono);font-size:.85rem;color:var(--muted);padding-top:.1rem}
+.note{background:var(--silk);padding:1rem 1.2rem;font-size:.95rem}
+.pending{border:1px dashed var(--muted);padding:1.1rem 1.2rem;color:var(--muted)}
+
+/* tables */
+.tbl{overflow-x:auto;border:1px solid var(--line);background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:.92rem;font-variant-numeric:tabular-nums}
+th,td{padding:.6rem .8rem;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
+thead th{font-family:var(--mono);font-weight:500;font-size:.75rem;letter-spacing:.04em;color:var(--muted);text-transform:uppercase;background:var(--paper);vertical-align:bottom}
+tbody tr:last-child td{border-bottom:0}
+td.hl{color:var(--mulberry);font-weight:600}
+tr.grp td{background:var(--leaf-soft);font-family:var(--mono);font-size:.75rem;text-transform:uppercase;letter-spacing:.05em;color:var(--leaf);text-align:left}
+.tcap{font-size:.85rem;color:var(--muted);margin-top:.5rem}
+
+/* products */
+.products{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1rem}
+.product{display:grid;gap:.6rem;align-content:start}
+.product img{aspect-ratio:3/4;object-fit:cover;width:100%}
+.product h3{font-size:1.05rem}
+.product p{font-size:.9rem;color:var(--muted)}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--ink)}
+.stats div{padding:1rem 1rem 0 0}
+.stats strong{font-family:var(--display);font-weight:400;font-size:clamp(2rem,4vw,2.8rem);color:var(--mulberry);display:block;line-height:1}
+.stats span{font-size:.9rem;color:var(--muted)}
+
+/* dissemination */
+.pubs{list-style:none;margin:0;padding:0;display:grid}
+.pubs li{padding:1rem 0;border-top:1px solid var(--line);display:grid;grid-template-columns:6.5rem minmax(0,1fr);gap:1rem}
+.pubs li .k{font-family:var(--mono);font-size:.75rem;text-transform:uppercase;letter-spacing:.05em;color:var(--mulberry);padding-top:.2rem}
+.pubs li p{font-size:.97rem}
+.pubs i{font-style:italic}
+
+/* gallery */
+.gallery{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.6rem}
+.gallery button{all:unset;cursor:zoom-in;display:block;position:relative;overflow:hidden;aspect-ratio:1/1;background:var(--line)}
+.gallery button:focus-visible{outline:2px solid var(--mulberry);outline-offset:2px}
+.gallery img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
+.gallery button:hover img{transform:scale(1.04)}
+@media (prefers-reduced-motion:reduce){.gallery img{transition:none}}
+.gallery .wide{grid-column:span 2;aspect-ratio:2/1}
+.lb{position:fixed;inset:0;z-index:50;background:rgba(10,14,12,.92);display:grid;place-items:center;padding:clamp(16px,4vw,48px)}
+.lb[hidden]{display:none}
+.lb figure{max-width:min(1200px,100%);display:grid;gap:.6rem}
+.lb img{max-height:80vh;width:auto;margin-inline:auto}
+.lb figcaption{color:#D8DED6;text-align:center;font-size:.92rem}
+.lb button{position:absolute;top:calc(12px + env(safe-area-inset-top,0px));right:16px;background:none;border:1px solid #9AA59D;color:#fff;font:inherit;padding:.35rem .8rem;cursor:pointer;border-radius:3px}
+
+/* footer */
+footer{background:var(--leaf);color:var(--paper);padding-block:3rem}
+footer a{color:var(--paper)}
+.fgrid{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:2rem}
+.fund{font-family:var(--display);font-size:1.25rem;line-height:1.35}
+.fmeta{font-size:.92rem;display:grid;gap:.6rem;opacity:.92}
+.copy{display:inline-flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.copy code{font-family:var(--mono);font-size:.9rem;user-select:all}
+.copy button{background:transparent;border:1px solid currentColor;color:inherit;font:inherit;font-size:.78rem;padding:.15rem .55rem;border-radius:3px;cursor:pointer}
+.fine{margin-top:2rem;padding-top:1rem;border-top:1px solid color-mix(in srgb,var(--paper) 30%,transparent);font-size:.8rem;opacity:.8}
+
+@media (max-width:900px){
+  .hero-grid,.sgrid,.fgrid{grid-template-columns:minmax(0,1fr)}
+  .slabel{position:static}
+  .hero-img img{aspect-ratio:3/2}
+  .products{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .gallery{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .three{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:600px){
+  .two,.partners,.three{grid-template-columns:minmax(0,1fr)}
+  .gallery{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .stats{grid-template-columns:minmax(0,1fr)}
+  .pubs li{grid-template-columns:minmax(0,1fr);gap:.3rem}
+  .nav{gap:.9rem}
+  .brand span{display:none}
+}
+</style>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#acasa"><b aria-hidden="true"></b>ADER 24.1.1<span>&nbsp;· Pharma-Farming</span></a>
+    <nav class="nav" aria-label="Secțiuni">
+      <a href="#proiect">Proiect</a>
+      <a href="#concept">Concept</a>
+      <a href="#consortiu">Consorțiu</a>
+      <a href="#etape">Etape</a>
+      <a href="#produse">Produse</a>
+      <a href="#consumatori">Consumatori</a>
+      <a href="#diseminare">Diseminare</a>
+      <a href="#galerie">Galerie</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="acasa">
+  <div class="wrap hero">
+    <div class="hero-grid">
+      <div>
+        <div class="funder"><img src="logo/madr.png" alt="Sigla Ministerului Agriculturii și Dezvoltării Rurale" width="56" height="56"><p class="eyebrow">Planul sectorial ADER 2023–2026<br>Ministerul Agriculturii și Dezvoltării Rurale</p></div>
+        <h1>Model de fermă sericicolă familială pentru valorificarea inovativă a producțiilor sericicole secundare obținute din sericicultură și moricultură în sistem <em>Pharma-Farming</em></h1>
+        <p class="lede">Proiectul dezvoltă o tehnologie de exploatare a fermei sericicole familiale și a plantației de dud prin care, pe lângă mătasea naturală, sunt valorificate crisalidele, sericina, fibroina și materia vegetală de dud în produse cu valoare biologică ridicată.</p>
+      </div>
+      <figure class="hero-img">
+        <img src="img/gogosi-hero.jpg" alt="Gogoși albe de mătase Bombyx mori" width="1300" height="867">
+        <span class="tag"><i>Bombyx mori</i> · gogoși de mătase</span>
+      </figure>
+    </div>
+    <dl class="facts">
+      <div><dt>Cod proiect</dt><dd>ADER 24.1.1</dd></div>
+      <div><dt>Contract</dt><dd class="num">nr. 24.1.1 / 12.07.2023</dd></div>
+      <div><dt>Finanțator</dt><dd>MADR</dd></div>
+      <div><dt>Buget</dt><dd class="num">1.000.000 lei</dd></div>
+      <div><dt>Perioadă</dt><dd class="num">2023 – 2026</dd></div>
+      <div><dt>Coordonator</dt><dd>USAMV Cluj-Napoca</dd></div>
+    </dl>
+  </div>
+
+  <!-- PROIECT -->
+  <section class="block" id="proiect">
+    <div class="wrap sgrid">
+      <div class="slabel"><span class="n">01</span><h2>Despre proiect</h2></div>
+      <div class="sbody">
+        <div class="prose">
+          <p>În contextul economiei românești, sericicultura și moricultura pot avea o contribuție importantă, atât prin potențialul de creștere a veniturilor fermierilor, cât și prin posibilitatea de a obține produse inovative cu un înalt grad de valoare biologică. Resursele din cele două ramuri permit direcții diverse de valorificare: de la utilizarea produselor secundare sericicole pentru biomateriale sau ca ingrediente în hrana animalelor, până la produse moricole cu potențial nutraceutic și suplimente alimentare.</p>
+          <p>Principalul produs al sericiculturii este mătasea naturală. Exploatarea speciei <i>Bombyx mori</i> permite însă obținerea și a altor produse cu potențial economic, precum crisalidele. Datorită conținutului ridicat de proteine, acestea pot intra în rețete furajere pentru diferite specii de animale de fermă și pot constitui materie primă pentru produse cosmetice sau medicinale.</p>
+          <p>Caracterul inovativ al proiectului constă și în utilizarea eficientă a resursei vegetale indispensabile sericiculturii. Proiectul propune integrarea matricilor vegetale de la specia <i>Morus</i> (frunze, fructe și lăstari) într-un produs nutraceutic care să concentreze o parte reprezentativă a compușilor bioactivi ai dudului, destinat consumului de către diferite categorii de vârstă.</p>
+        </div>
+        <div>
+          <p class="eyebrow">Obiectiv principal</p>
+          <p class="objective" style="margin-top:.6rem">Elaborarea unei tehnologii de exploatare eficientă a fermei sericicole familiale și a plantației de dud în sistem „Pharma-Farming”, în vederea obținerii unor produse sericicole secundare inovative și a revitalizării sericiculturii în România.</p>
+        </div>
+        <div>
+          <p class="eyebrow">Rezultate scontate</p>
+          <ul class="results" style="margin-top:.4rem">
+            <li>Prototiparea fermei sericicole pentru sistemul Pharma-Farming</li>
+            <li>Exploatarea eficientă a fermei sericicole și a plantației de dud</li>
+            <li>Obținerea în ferma familială a produselor secundare inovative de înaltă valoare biologică</li>
+            <li>Analiza calitativă în laborator a produselor secundare sericicole și moricole</li>
+            <li>Obținerea de produse inovative pe bază de produse sericicole și moricole</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONCEPT -->
+  <section class="block" id="concept">
+    <div class="wrap sgrid">
+      <div class="slabel"><span class="n">02</span><h2>Conceptul Pharma-Farming</h2></div>
+      <div class="sbody">
+        <p class="prose">Pharma-Farming tratează ferma sericicolă ca sursă de compuși de interes pentru industria farmaceutică, alimentară, cosmetică și pentru agricultură. Fiecare etapă a ciclului de viață al viermelui de mătase și fiecare parte a dudului generează un produs valorificabil.</p>
+        <div class="cycle" role="group" aria-label="Ciclul sericicol și produsele secundare asociate fiecărei etape">
+          <div class="cycle-row">
+            <div class="stage"><div class="s"><small><i>Morus</i> spp.</small><strong>Dud</strong></div><ul><li class="chip">frunze</li><li class="chip">fructe</li><li class="chip">scoarță</li><li class="chip">lăstari</li></ul></div>
+            <div class="stage"><div class="s"><small>vârstele I–V</small><strong>Larvă</strong></div><ul><li class="chip">dejecții</li></ul></div>
+            <div class="stage"><div class="s"><small>filatura</small><strong>Gogoașă</strong></div><ul><li class="chip">crisalide</li><li class="chip">fibroină</li><li class="chip">sericină</li></ul></div>
+            <div class="stage"><div class="s"><small>adult</small><strong>Fluture</strong></div><ul><li class="chip">reproducție</li><li class="chip">hrană</li></ul></div>
+            <div class="stage"><div class="s"><small>sămânța de viermi</small><strong>Ouă</strong></div><ul><li class="chip">fond genetic</li></ul></div>
+          </div>
+        </div>
+        <div class="byp">
+          <div><h3>Sericina</h3><p>Proprietăți antioxidante, hidratante și antiinflamatoare. Utilizată în creme și loțiuni și în pansamente și produse dermatologice care susțin regenerarea țesuturilor.</p></div>
+          <div><h3>Fibroina</h3><p>Biocompatibilă și biodegradabilă. Aplicații în suturi chirurgicale biodegradabile și ca vehicul pentru eliberarea controlată a medicamentelor.</p></div>
+          <div><h3>Crisalidele</h3><p>Bogate în aminoacizi și acizi grași esențiali. Procesate în pulbere proteică pentru alimentația umană și animală și folosite în cosmetice.</p></div>
+          <div><h3>Frunzele și lăstarii de dud</h3><p>Surse de antioxidanți, vitamine și minerale, cu efecte antiinflamatoare, hipolipidemice, antihiperglicemiante și neuroprotectoare.</p></div>
+        </div>
+        <figure class="frame">
+          <img src="img/schema-pharma-farming.jpg" alt="Schema integrată a principiului Pharma-Farming: plantație de duzi, magnanerie, produse fitoterapeutice, biomateriale, industria cosmetică, biogaz" width="1017" height="726" loading="lazy">
+          <figcaption>Schema integrată a principiului Pharma-Farming (original, Faza 1).</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONSORTIU -->
+  <section class="block" id="consortiu">
+    <div class="wrap sgrid">
+      <div class="slabel"><span class="n">03</span><h2>Consorțiu</h2><p class="muted" style="font-size:.95rem">Patru parteneri, fiecare responsabil pentru o zonă cu potențial sericicol.</p></div>
+      <div class="sbody">
+        <div class="partners">
+          <article class="partner lead">
+            <div class="ph"><span class="logo"><img src="logo/usamv.png" alt="Sigla USAMV Cluj-Napoca" width="71" height="71"></span><div class="role"><b>Coordonator (CP)</b><span>Zona 1 · Transilvania</span></div></div>
+            <h3>Universitatea de Științe Agricole și Medicină Veterinară Cluj-Napoca</h3>
+            <p class="desc">Universitate cu tradiție din 1869 în științele agricole, veterinare și alimentare. Prin Facultatea de Zootehnie și Biotehnologii găzduiește Centrul Global de Excelență pentru Cercetare Avansată în Sericicultură și Promovarea Producției de Mătase (CGECAS-PPM), recunoscut de International Sericultural Commission în 2016. În proiect coordonează consorțiul, prototipează ferma Pharma-Farming și realizează caracterizarea de laborator a produselor.</p>
+            <p>Director de proiect: <strong>Prof. univ. dr. ing. Daniel Severus Dezmirean</strong></p>
+          </article>
+          <article class="partner">
+            <div class="ph"><span class="logo"><img src="logo/scs-baneasa.png" alt="Sigla Stațiunii de Cercetări Sericicole Băneasa" width="320" height="320"></span><div class="role"><b>Partener 1</b><span>Zona 2 · Muntenia și Dobrogea</span></div></div>
+            <h3>Stațiunea de Cercetări Sericicole Băneasa București</h3>
+            <p class="desc">Unitate de cercetare-dezvoltare dedicată sericiculturii, care conservă fondul genetic sericicol național: rase de viermi de mătase și soiuri de dud. În proiect evaluează rasele și hibrizii din genofond, dezvoltă tincturile din lăstari de dud și realizează analizele paralele ale fructelor de dud.</p>
+            <p>Responsabil: <strong>Dr. Nicoleta Lefter</strong></p>
+          </article>
+          <article class="partner">
+            <div class="ph"><span class="logo"><img src="logo/usv-iasi.png" alt="Sigla Universității de Științele Vieții Ion Ionescu de la Brad din Iași" width="270" height="320"></span><div class="role"><b>Partener 2</b><span>Zona 3 · Moldova</span></div></div>
+            <h3>Universitatea de Științele Vieții „Ion Ionescu de la Brad” din Iași</h3>
+            <p class="desc">Cea mai veche instituție de învățământ superior agronomic din Moldova, cu activitate începută în 1912. Proiectul se derulează în Facultatea de Ingineria Resurselor Animale și Alimentare, care evaluează condițiile pedo-climatice din Moldova și diseminează tehnologia către fermierii din regiune.</p>
+            <p>Responsabil: <strong>Prof. univ. dr. Marius Doliș</strong></p>
+          </article>
+          <article class="partner">
+            <div class="ph"><span class="logo"><img src="logo/usvt.png" alt="Sigla Universității de Științele Vieții Regele Mihai I din Timișoara" width="300" height="300"></span><div class="role"><b>Partener 3</b><span>Zona 4 · Banat</span></div></div>
+            <h3>Universitatea de Științele Vieții „Regele Mihai I” din Timișoara</h3>
+            <p class="desc">Universitate fondată în 1945, centrul de referință al științelor agricole și veterinare din vestul țării. Prin Facultatea de Bioingineria Resurselor Animale evaluează potențialul sericicol al Banatului și diseminează rezultatele în cadrul conferințelor internaționale organizate la Timișoara.</p>
+            <p>Responsabil: <strong>Prof. univ. dr. Silvia Pătruică</strong></p>
+          </article>
+        </div>
+        <figure class="frame">
+          <img src="img/harta-zone.jpg" alt="Harta României cu cele patru zone cu potențial sericicol și valorile medii de temperatură, umiditate și precipitații din mai–iulie 2023" width="1363" height="805" loading="lazy">
+          <figcaption>Evaluarea climatică detaliată a zonelor cu potențial sericicol din România: temperaturi, umiditate și precipitații medii, mai–iulie 2023 (original). În toate cele patru zone, solurile se pretează culturii dudului.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ETAPE -->
+  <section class="block" id="etape">
+    <div class="wrap sgrid">
+      <div class="slabel"><span class="n">04</span><h2>Etape de implementare</h2></div>
+      <div class="sbody">
+
+        <article class="phase" id="faza1">
+          <div class="phase-head">
+            <span class="when">Faza 1 · iulie – octombrie 2023</span>
+            <h3>Fundamentarea conceptului Pharma-Farming și prospectarea zonelor cu potențial sericicol</h3>
+          </div>
+          <ol class="acts">
+            <li><span>A 1.1</span><p>Studiu bibliografic privind potențialul biologic activ al produselor sericicole (84 de titluri citate) și evaluarea raselor și hibrizilor din genofondul sericicol al României: rase autohtone, linii indigene, rase importate cu gogoși albe, galbene, colorate și verzi, rase bivoltine și polivoltine.</p></li>
+            <li><span>A 1.2</span><p>Definirea conceptului Pharma-Farming pe particularitățile produselor sericicole din zone distincte ale României și prototiparea fermei sericicole.</p></li>
+            <li><span>A 1.3</span><p>Prospectarea zonelor cu potențial sericicol în raport cu schimbările pedo-climatice recente: temperatură, umiditate, precipitații și radiație solară în perioada de creștere a viermilor (mai–iulie).</p></li>
+            <li><span>A 1.4</span><p>Asigurarea bazei furajere: elaborarea tehnologiei de exploatare a resurselor moricole și înființarea plantației model de dud.</p></li>
+          </ol>
+          <p class="note">Concluzie: multiplicarea corectă a dudului (prin sămânță, butășire sau marcotaj) este condiția principală pentru producții de frunze suficiente cantitativ și calitativ. Conservarea resurselor genetice <i>Morus</i> trebuie să includă introducerea varietăților valoroase din fondul mondial și selecția intraclonală permanentă.</p>
+        </article>
+
+        <article class="phase" id="faza2">
+          <div class="phase-head">
+            <span class="when">Faza 2 · noiembrie 2023 – octombrie 2024</span>
+            <h3>Creșterea performanței și sustenabilității fermelor sericicole familiale prin adoptarea conceptului Pharma-Farming</h3>
+          </div>
+          <ol class="acts">
+            <li><span>A 2.1</span><p>Elaborarea tehnologiei de exploatare eficientă a fermei și a plantației de dud, concretizată în <strong>Modulul Sericicol Familial în sistem Pharma-Farming (MSF-FF)</strong>. Designul modular permite creșterea unui număr mare de larve pe o suprafață redusă, cu acces facil la fiecare pat. Tehnologia a fost diseminată în zonele 1–4.</p></li>
+            <li><span>A 2.2</span><p>Identificarea principalelor produse secundare de înaltă valoare biologică (sericină, fibroină, crisalide, frunze și lăstari de dud) și testarea lăstarilor de dud pentru tincturi cu proprietăți specifice.</p></li>
+            <li><span>A 2.3</span><p>Dezvoltarea a două produse inovative: o gamă de patru săpunuri emoliente cu subproduse sericicole (CP) și tincturi din lăstari de dud (P1, caracterizate de CP).</p></li>
+            <li><span>A 2.4</span><p>Continuarea evaluării condițiilor locale de sol și climă în zonele cu potențial sericicol.</p></li>
+          </ol>
+          <div class="two">
+            <figure class="frame"><img src="img/poster-faza2.jpg" alt="Poster de prezentare a proiectului ADER 24.1.1 cu activitățile Fazei 2" width="970" height="600" loading="lazy"><figcaption>Poster de diseminare, Activitatea 2.1.</figcaption></figure>
+            <figure><img src="img/plantatie-dud.jpg" alt="Plantație de dud în seră" width="1600" height="1060" loading="lazy" style="aspect-ratio:970/600;object-fit:cover;width:100%"><figcaption>Plantația de dud, baza furajeră a fermei.</figcaption></figure>
+          </div>
+        </article>
+
+        <article class="phase" id="faza3">
+          <div class="phase-head">
+            <span class="when">Faza 3 · noiembrie 2024 – octombrie 2025</span>
+            <h3>Validarea performanței și sustenabilității fermelor sericicole familiale prin adoptarea conceptului Pharma-Farming</h3>
+          </div>
+          <ol class="acts">
+            <li><span>A 3.1</span><p>Testarea tehnologiei de creștere a viermilor de mătase în Modulul Sericicol Familial, cu monitorizarea temperaturii, umidității, luminozității și aerisirii. Mese rotunde cu fermieri din zonele cu potențial sericicol.</p></li>
+            <li><span>A 3.2</span><p>Testarea și validarea obținerii de produse inovative: caracterizarea dietei naturale a viermilor de mătase (frunze de dud) și a fructelor de dud (albe, roșii, negre) în laboratoarele CP și P1.</p></li>
+            <li><span>A 3.3</span><p>Finalizarea evaluării detaliate a condițiilor locale de sol și climă pentru zona 1, cu date zilnice pentru mai, iunie și iulie 2025.</p></li>
+            <li><span>A 3.4</span><p>Evaluarea percepției consumatorilor asupra produselor sericicole, prin chestionar.</p></li>
+          </ol>
+          <div>
+            <p class="eyebrow">Dieta naturală a viermilor de mătase · frunze de dud</p>
+            <div class="tbl" style="margin-top:.6rem">
+              <table>
+                <thead><tr><th>Parametru (% s.u.)</th><th>SCS Băneasa</th><th>USAMV-CN</th></tr></thead>
+                <tbody>
+                  <tr><td>Proteine</td><td>20,22</td><td>20,49</td></tr>
+                  <tr><td>Lipide</td><td>1,716</td><td>1,725</td></tr>
+                  <tr><td>Glucide totale (fructoză, glucoză, zaharoză), HPLC</td><td>9,832</td><td>9,799</td></tr>
+                  <tr><td>Flavonoide totale, extract EtOH / MeOH</td><td>0,13 / 0,63</td><td>0,14 / 0,65</td></tr>
+                  <tr><td>Polifenoli totali, extract EtOH / MeOH</td><td>0,22 / 0,29</td><td>0,21 / 0,31</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="tcap">Valori medii raportate la substanța uscată; analize efectuate la APHIS-DIA Cluj-Napoca. Metode: Kjeldahl și Bradford (proteine), Soxhlet (lipide), HPLC-IR (glucide), Folin-Ciocâlteu (polifenoli), AlCl<sub>3</sub> (flavonoide).</p>
+          </div>
+          <div class="three">
+            <figure><img src="img/fructe-dud-lab.jpg" alt="Probe de fructe de dud albe, roșii și negre pe balanța de laborator" width="1600" height="1205" loading="lazy" style="aspect-ratio:4/3;object-fit:cover;width:100%"><figcaption>Fructe de dud pregătite pentru analiză.</figcaption></figure>
+            <figure><img src="img/extracte.jpg" alt="Extracte vegetale în baloane cotate" width="921" height="691" loading="lazy" style="aspect-ratio:4/3;object-fit:cover;width:100%"><figcaption>Extracte pentru determinarea compușilor fenolici.</figcaption></figure>
+            <figure><img src="img/lab-analize.jpg" alt="Cercetătoare efectuând analize spectrofotometrice" width="592" height="444" loading="lazy" style="aspect-ratio:4/3;object-fit:cover;width:100%"><figcaption>Analize spectrofotometrice în laboratorul CP.</figcaption></figure>
+          </div>
+          <div>
+            <p class="eyebrow">Monitorizare climatică · zona 1 · 2025</p>
+            <div class="three" style="margin-top:.6rem">
+              <figure class="frame"><img src="img/clima-mai-prec.jpg" alt="Grafic: variația umidității și a precipitațiilor în mai 2025" width="1200" height="700" loading="lazy"><figcaption>Mai 2025</figcaption></figure>
+              <figure class="frame"><img src="img/clima-iun-prec.jpg" alt="Grafic: variația umidității și a precipitațiilor în iunie 2025" width="1200" height="700" loading="lazy"><figcaption>Iunie 2025</figcaption></figure>
+              <figure class="frame"><img src="img/clima-iul-prec.jpg" alt="Grafic: variația umidității și a precipitațiilor în iulie 2025" width="1200" height="700" loading="lazy"><figcaption>Iulie 2025</figcaption></figure>
+            </div>
+          </div>
+        </article>
+
+        <article class="phase" id="faza4">
+          <div class="phase-head">
+            <span class="when">Faza 4 · 2026</span>
+            <h3>Etapa finală</h3>
+          </div>
+          <p class="pending">Etapă în desfășurare. Activitățile și rezultatele vor fi publicate aici după raportarea fazei.</p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUSE -->
+  <section class="block" id="produse">
+    <div class="wrap sgrid">
+      <div class="slabel"><span class="n">05</span><h2>Produse inovative</h2></div>
+      <div class="sbody">
+        <div>
+          <h3>Săpunuri emoliente cu subproduse sericicole</h3>
+          <p class="prose muted" style="margin-top:.5rem">Patru formule obținute prin metoda la rece, cu ingrediente provenite din ferma sericicolă în sistem Pharma-Farming (Faza 2, CP).</p>
+        </div>
+        <div class="products">
+          <article class="product"><img src="img/sapun-preparare1.jpg" alt="Uleiuri și unturi vegetale cântărite pentru săpunul standard" width="301" height="429" loading="lazy"><h3>Săpun standard</h3><p>Formula de referință, cu toate ingredientele de bază.</p></article>
+          <article class="product"><img src="img/sapun-dud.jpg" alt="Săpun verde cu pulbere de frunză de dud, în tavă" width="298" height="416" loading="lazy"><h3>Cu pulbere de frunză de dud</h3><p>Efect antioxidant și antiinflamator, curățare blândă și nutrienți suplimentari pentru piele.</p></article>
+          <article class="product"><img src="img/sapun-crisalide.jpg" alt="Săpun crem cu crisalide de viermi de mătase, în tavă" width="314" height="416" loading="lazy"><h3>Cu crisalide de viermi de mătase</h3><p>Proteinele din crisalide susțin elasticitatea și fermitatea pielii. Potrivit pentru pielea uscată sau matură.</p></article>
+          <article class="product"><img src="img/sapunuri.jpg" alt="Calupuri finite din cele patru tipuri de săpun" width="706" height="436" loading="lazy"><h3>Frunză de dud + crisalide</h3><p>Combină protecția antioxidantă a frunzei cu hidratarea și regenerarea aduse de crisalide.</p></article>
+        </div>
+
+        <div class="two" style="align-items:start">
+          <div style="display:grid;gap:.8rem">
+            <h3>Tincturi din lăstari de dud</h3>
+            <p class="muted">Trei concentrații în etanol 70%, preparate de P1 după modelul tincturilor de propolis și caracterizate de CP. Direcții de aplicare investigate: adjuvant în diabet, produse anti-îmbătrânire, suplimente pentru imunitate.</p>
+            <div class="tbl">
+              <table>
+                <thead><tr><th>Tinctură</th><th>Polifenoli<br>mg/ml</th><th>Flavonoide<br>mg/ml</th><th>OD</th><th>RSA %</th></tr></thead>
+                <tbody>
+                  <tr><td>5%</td><td>0,048</td><td>0,070</td><td>0,083</td><td>83,91</td></tr>
+                  <tr><td>10%</td><td>0,067</td><td>0,078</td><td>0,096</td><td>81,40</td></tr>
+                  <tr><td>20%</td><td class="hl">0,128</td><td class="hl">0,082</td><td>0,109</td><td>78,88</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <figure><img src="img/tincturi.jpg" alt="Trei baloane cu tincturi din lăstari de dud în concentrații de 5, 10 și 20%" width="486" height="356" loading="lazy" style="width:100%"><figcaption>Tincturi 5%, 10% și 20% din lăstari de dud.</figcaption></figure>
+        </div>
+
+        <div>
+          <h3>Fructe de dud: conținut fenolic și activitate antioxidantă</h3>
+          <p class="prose muted" style="margin-top:.5rem">Extracte din fructe albe, roșii și negre la 1%, 5% și 10%, analizate în paralel la CP și P1 (Faza 3). TP: polifenoli totali; TF: flavonoide totale; RSA: activitate de captare a radicalilor liberi.</p>
+          <div class="tbl" style="margin-top:.8rem">
+            <table>
+              <thead>
+                <tr><th rowspan="2">Probă</th><th colspan="3" style="text-align:center">CP · USAMV Cluj-Napoca</th><th colspan="3" style="text-align:center">P1 · SCS Băneasa</th></tr>
+                <tr><th>TP mg/g</th><th>TF mg/g</th><th>RSA %</th><th>TP mg/g</th><th>TF mg/g</th><th>RSA %</th></tr>
+              </thead>
+              <tbody>
+                <tr class="grp"><td colspan="7">Concentrație 1%</td></tr>
+                <tr><td>Fructe albe</td><td>0,209</td><td>0,104</td><td>22,04</td><td>0,212</td><td>0,099</td><td>21,34</td></tr>
+                <tr><td>Fructe roșii</td><td>0,435</td><td>0,112</td><td>12,03</td><td>0,411</td><td>0,105</td><td>12,26</td></tr>
+                <tr><td>Fructe negre</td><td>0,751</td><td>0,358</td><td>30,05</td><td>0,756</td><td>0,322</td><td>30,26</td></tr>
+                <tr class="grp"><td colspan="7">Concentrație 5%</td></tr>
+                <tr><td>Fructe albe</td><td>0,248</td><td>0,666</td><td>42,11</td><td>0,256</td><td>0,654</td><td>42,12</td></tr>
+                <tr><td>Fructe roșii</td><td>0,498</td><td>0,124</td><td>22,00</td><td>0,569</td><td>0,155</td><td>22,05</td></tr>
+                <tr><td>Fructe negre</td><td>0,825</td><td>0,441</td><td>45,34</td><td>0,845</td><td>0,441</td><td>45,34</td></tr>
+                <tr class="grp"><td colspan="7">Concentrație 10%</td></tr>
+                <tr><td>Fructe albe</td><td>0,508</td><td>1,327</td><td>64,91</td><td>0,508</td><td>1,230</td><td>65,31</td></tr>
+                <tr><td>Fructe roșii</td><td>0,502</td><td>0,253</td><td>44,17</td><td>0,562</td><td>0,223</td><td>44,19</td></tr>
+                <tr><td>Fructe negre</td><td class="hl">1,722</td><td>0,725</td><td class="hl">81,94</td><td class="hl">1,658</td><td>0,820</td><td class="hl">82,95</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="tcap">Cea mai mare activitate antioxidantă a fost obținută pentru extractul de fructe negre 10%, cu valori concordante între cele două laboratoare.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONSUMATORI -->
+  <section class="block" id="consumatori">
+    <div class="wrap sgrid">
+      <div class="slabel"><span class="n">06</span><h2>Percepția consumatorilor</h2></div>
+      <div class="sbody">
+        <p class="prose">Chestionarul „Identificarea factorilor care influențează decizia de cumpărare și îmbunătățirea strategiilor de marketing pentru creșterea vânzărilor de produse sericicole” a urmărit profilul socio-demografic al respondenților, cunoștințele și percepțiile despre sericicultură și factorii care influențează decizia de cumpărare.</p>
+        <div class="stats">
+          <div><strong class="num">79</strong><span>răspunsuri valide, din mai multe județe</span></div>
+          <div><strong class="num">14</strong><span>întrebări principale</span></div>
+          <div><strong class="num">30–39</strong><span>ani, segmentul de vârstă dominant</span></div>
+        </div>
+        <div class="two">
+          <figure class="frame"><img src="img/chest-interes.jpg" alt="Grafic: corelația dintre interesul pentru produsele sericicole și importanța acordată originii naturale; scoruri între 4,35 și 4,51 din 5" width="1600" height="1095" loading="lazy"><figcaption>Importanța originii naturale și a sustenabilității, pe tip de produs (scor 1–5).</figcaption></figure>
+          <figure class="frame"><img src="img/chest-media.jpg" alt="Grafic inelar: percepția privind rolul mass-mediei și necesitatea promovării sericiculturii" width="1119" height="892" loading="lazy"><figcaption>Percepția asupra rolului mass-mediei și a nevoii de promovare.</figcaption></figure>
+        </div>
+        <ul class="results">
+          <li>Interes ridicat pentru produsele sericicole, în special pentru derivatele utilizate în domeniul cosmetic, farmaceutic și biotehnologic.</li>
+          <li>Scoruri mari pentru calitatea materiei prime și originea naturală a produsului, în acord cu tendința spre consum responsabil.</li>
+          <li>Rolul mass-mediei în promovarea sericiculturii este perceput ca redus, de unde nevoia unei comunicări orientate spre educarea publicului.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- DISEMINARE -->
+  <section class="block" id="diseminare">
+    <div class="wrap sgrid">
+      <div class="slabel"><span class="n">07</span><h2>Diseminare</h2></div>
+      <div class="sbody">
+        <div>
+          <p class="eyebrow">Publicații și comunicări</p>
+          <ul class="pubs" style="margin-top:.6rem">
+            <li><span class="k">Articol</span><p>Savu V., Şapcaliu A. The importance of proactive approach to the microscopic laboratory techniques for the prevention and control of major silkworm diseases. <i>Scientific Papers: Animal Science and Biotechnologies</i>, 2024, 57(1), 266–272.</p></li>
+            <li><span class="k">Articol</span><p>Savu V., Şapcaliu A. Progrese în diagnosticul bolilor la viermii de mătase – tendințe actuale și perspective. <i>Revista de Zootehnie</i>, 2024, nr. 1–2, 158–166.</p></li>
+            <li><span class="k">Articol</span><p>Moise A.R., Negrea-Baci G.M., Lefter N.A., Pătruică S., Doliș M.G., Dezmirean D.S. Marketing and research strategies for improving the Romanian sericulture sector.</p></li>
+            <li><span class="k">Comunicare</span><p>Savu V., Şapcaliu A. The importance of proactive approach to the microscopic laboratory techniques for the prevention and control of major silkworm diseases. International Multidisciplinary Conference on Sustainable Development – Animal Resources Bioengineering, 30–31 mai 2024, USV Timișoara. Book of Abstracts, p. 58.</p></li>
+            <li><span class="k">Poster</span><p>Savu V., Şapcaliu A., Andrei M., Moise A.R., Pătruică S. Development of an improved technology to increase production efficiency in the sericulture farm. International Multidisciplinary Conference on Sustainable Development – Animal Resources Bioengineering, 30–31 mai 2024, USV Timișoara. Book of Abstracts, p. 59.</p></li>
+          </ul>
+        </div>
+        <div>
+          <p class="eyebrow">Evenimente</p>
+          <ul class="pubs" style="margin-top:.6rem">
+            <li><span class="k num">12.07.2024</span><p>Vizită la Italtextil, Sărata (jud. Bistrița-Năsăud), împreună cu o delegație din Thailanda: schimb de bune practici și explorarea integrării noilor tehnologii în sericicultură.</p></li>
+            <li><span class="k num">21.10.2024</span><p>Masă rotundă de diseminare a rezultatelor proiectului, susținută de Prof. dr. Marius Doliș, Facultatea de Ingineria Resurselor Animale și Alimentare, USV Iași.</p></li>
+            <li><span class="k">2025</span><p>Masă rotundă cu fermieri din zona 1: „Model de fermă sericicolă familială pentru valorificarea inovativă a producțiilor sericicole obținute din sericicultură și moricultură în sistem Pharma-Farming”, USAMV Cluj-Napoca.</p></li>
+            <li><span class="k">2025</span><p>Masă rotundă „Sericicultura – între tradiție și inovație, perspective sustenabile”, organizată de SCS Băneasa București (P1).</p></li>
+          </ul>
+        </div>
+        <div class="three">
+          <figure><img src="img/italtextil-vizita.jpg" alt="Delegație vizitând o magnanerie la Italtextil Sărata" width="532" height="364" loading="lazy" style="aspect-ratio:4/3;object-fit:cover;width:100%"><figcaption>Italtextil Sărata, 12 iulie 2024.</figcaption></figure>
+          <figure><img src="img/italtextil-filatura.jpg" alt="Mașini de filare a mătăsii" width="484" height="594" loading="lazy" style="aspect-ratio:4/3;object-fit:cover;width:100%"><figcaption>Linie de filare a mătăsii.</figcaption></figure>
+          <figure><img src="img/italtextil-bobine.jpg" alt="Bobine de fir de mătase albe și roz" width="446" height="594" loading="lazy" style="aspect-ratio:4/3;object-fit:cover;width:100%"><figcaption>Bobine de fir de mătase.</figcaption></figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALERIE -->
+  <section class="block" id="galerie">
+    <div class="wrap sgrid">
+      <div class="slabel"><span class="n">08</span><h2>Galerie</h2><p class="muted" style="font-size:.95rem">Selectați o imagine pentru a o mări.</p></div>
+      <div class="sbody">
+        <div class="gallery" id="gallery">
+          <button class="wide" data-cap="Seră cu plantație de dud"><img src="img/sera-dud.jpg" alt="Seră cu plantație de dud" loading="lazy"></button>
+          <button data-cap="Larvă de <i>Bombyx mori</i> pe frunză de dud"><img src="img/larva-bombyx.jpg" alt="Larvă de Bombyx mori pe frunză de dud" loading="lazy"></button>
+          <button data-cap="Frunze de dud recoltate"><img src="img/frunze-dud.jpg" alt="Frunze de dud recoltate" loading="lazy"></button>
+          <button data-cap="Plantarea duzilor în parcela model"><img src="img/plantare-dud.jpg" alt="Doi cercetători plantând duzi" loading="lazy"></button>
+          <button data-cap="Gogoși formate în Modulul Sericicol Familial"><img src="img/msf-gogosi.jpg" alt="Gogoși pe suport de filare în modulul sericicol" loading="lazy"></button>
+          <button class="wide" data-cap="Fructe de dud pregătite pentru analiză"><img src="img/fructe-dud-lab.jpg" alt="Fructe de dud în cutii Petri" loading="lazy"></button>
+          <button data-cap="Extracția lipidelor prin metoda Soxhlet"><img src="img/soxhlet.jpg" alt="Aparat Soxhlet" loading="lazy"></button>
+          <button data-cap="Determinarea polifenolilor totali (Folin-Ciocâlteu)"><img src="img/folin.jpg" alt="Eprubete cu soluții albastre de intensități diferite" loading="lazy"></button>
+          <button data-cap="Spectrofotometrie UV-VIS"><img src="img/spectrofotometru.jpg" alt="Ecran de spectrofotometru" loading="lazy"></button>
+          <button data-cap="Extracte vegetale"><img src="img/extractie.jpg" alt="Tuburi cu extracte în centrifugă" loading="lazy"></button>
+          <button data-cap="Prepararea săpunului: uleiuri și unturi vegetale"><img src="img/sapun-preparare2.jpg" alt="Măsurarea temperaturii amestecului de uleiuri" loading="lazy"></button>
+          <button data-cap="Calupuri de săpun cu subproduse sericicole"><img src="img/sapunuri.jpg" alt="Calupuri de săpun" loading="lazy"></button>
+          <button data-cap="Probe de material vegetal la balanța analitică"><img src="img/lab-probe.jpg" alt="Pulberi vegetale și balanță analitică" loading="lazy"></button>
+          <button data-cap="Delegația thailandeză la Italtextil, Sărata"><img src="img/italtextil-vizita.jpg" alt="Vizită la magnanerie" loading="lazy"></button>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="fgrid">
+      <div style="display:grid;gap:1rem">
+        <p class="fund">Proiect finanțat de Ministerul Agriculturii și Dezvoltării Rurale prin Planul sectorial de cercetare-dezvoltare ADER 2023–2026.</p>
+        <p class="fmeta"><a href="https://www.madr.ro/cercetare-agricola/planul-sectorial-de-cercetare-ader.html" target="_blank" rel="noopener">Planul sectorial ADER pe madr.ro ↗</a></p>
+      </div>
+      <div class="fmeta">
+        <p><strong>Director de proiect</strong><br>Prof. univ. dr. ing. Daniel Severus Dezmirean<br>USAMV Cluj-Napoca</p>
+        <p class="copy"><code id="mail">ddezmirean@usamvcluj.ro</code><button type="button" id="copyMail">Copiază</button></p>
+      </div>
+    </div>
+    <div class="logos" aria-label="Finanțator și parteneri"><img src="logo/madr.png" alt="MADR"><img src="logo/usamv.png" alt="USAMV Cluj-Napoca"><img src="logo/scs-baneasa.png" alt="SCS Băneasa"><img src="logo/usv-iasi.png" alt="USV Iași"><img src="logo/usvt.png" alt="USV Timișoara"></div>
+    <p class="fine">ADER 24.1.1 · Contract nr. 24.1.1/12.07.2023 · Coordonator: USAMV Cluj-Napoca · Parteneri: SCS Băneasa București, USV Iași, USV Timișoara</p>
+  </div>
+</footer>
+
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Imagine mărită">
+  <button type="button" id="lbClose">Închide ✕</button>
+  <figure><img id="lbImg" alt=""><figcaption id="lbCap"></figcaption></figure>
+</div>
+
+<script>
+(function(){
+  var lb=document.getElementById('lb'),img=document.getElementById('lbImg'),cap=document.getElementById('lbCap'),last=null;
+  document.getElementById('gallery').addEventListener('click',function(e){
+    var b=e.target.closest('button'); if(!b) return;
+    var i=b.querySelector('img'); last=b;
+    img.src=i.src; img.alt=i.alt; cap.innerHTML=b.dataset.cap||'';
+    lb.hidden=false; document.getElementById('lbClose').focus();
+  });
+  function close(){lb.hidden=true; if(last) last.focus();}
+  document.getElementById('lbClose').addEventListener('click',close);
+  lb.addEventListener('click',function(e){ if(e.target===lb) close(); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&!lb.hidden) close(); });
+  var btn=document.getElementById('copyMail');
+  btn.addEventListener('click',function(){
+    var t=document.getElementById('mail').textContent;
+    function sel(){var r=document.createRange();r.selectNodeContents(document.getElementById('mail'));var s=getSelection();s.removeAllRanges();s.addRange(r);}
+    try{ navigator.clipboard.writeText(t).then(function(){btn.textContent='Copiat';setTimeout(function(){btn.textContent='Copiază';},1600);},sel);}catch(err){sel();}
+  });
+})();
+</script>
